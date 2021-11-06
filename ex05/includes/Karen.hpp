@@ -7,11 +7,8 @@
 class Karen
 {
     private:
-        std::string _debug;
-        std::string _info;
-        std::string _warning;
-        std::string _error;
-        Karen* _ptr;
+        std::string _level[4];
+        void (Karen::*_funct[4])();
         void debug( void );
         void info( void );
         void warning( void );

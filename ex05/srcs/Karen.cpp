@@ -1,6 +1,6 @@
 #include "Karen.hpp"
 
-Karen::Karen( void ) : _debug("DEBUG"), _info("INFO"), _warning("WARNING"), _error("ERROR"), _ptr(0)
+Karen::Karen( void ) : _level{"DEBUG", "INFO", "WARNING", "ERROR"} , _funct{&Karen::info, &Karen::debug, &Karen::warning, &Karen::error}
 {
 
 }

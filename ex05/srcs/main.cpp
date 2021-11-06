@@ -2,25 +2,26 @@
 
 void Karen::complain( std::string level )
 {
-    try
+    for (int i = 0 ; i < 4; i++)
     {
-        Karen()
-        level.compare("DEBUG") and level.compare("INFO") and level.compare("WARNING") and level.compare("ERROR");
+        if (level.compare(this->_level[i]) == 0)
+        {
+             void (Karen::*f)() = _funct[i];
+             (this->*f)();
+        }
+
     }
-    catch(const std::string& e)
-    {
-        std::cout << level << '\n';
-    }
-    
 }
 
 int main( void )
 {
     std::string buf("");
-    Karen ptr;
+    Karen obj;
 
-    getline(std::cin, buf);
-    ptr.complain(buf);
-
-
+    while (buf.compare("EXIT"))
+    {
+        getline(std::cin, buf);
+        obj.complain(buf);
+    }
+    return (0);
 }
