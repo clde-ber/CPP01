@@ -6,7 +6,7 @@ void Karen::complain( std::string level )
     {
         if (level.compare(this->_level[i]) == 0)
         {
-             void (Karen::*f)() = _funct[i];
+             void (Karen::*f)() = this->_funct[i];
              (this->*f)();
         }
 
