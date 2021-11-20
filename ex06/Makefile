@@ -1,11 +1,11 @@
 .SUFFIXES:
 
-NAME	=	Zombie
+NAME	=	karenFilter
 LIST	=	main \
 			Karen \
 
 HEADER	=	-I includes/
-CFLAGS	=	-Wall -Wextra -Werror -MMD
+CFLAGS	=	-Wall -Wextra -Werror -MMD -std=c++98 -g3 -fsanitize=address
 CC		=	clang++
 
 S_DIR	=	srcs/

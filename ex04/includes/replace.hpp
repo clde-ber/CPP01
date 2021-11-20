@@ -1,10 +1,10 @@
 #ifndef REPLACE_H
 #define REPLACE_H
 
-#include <sstream>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstring>
 
 class strings
 {

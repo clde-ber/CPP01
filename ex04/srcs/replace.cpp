@@ -2,20 +2,23 @@
 
 int main(int ac, char **av)
 {
-    const std::string& s1(av[2]);
-    const std::string& s2(av[3]);
+  if (ac != 4)
+        return 0;
+    const char* s1(av[2]);
+    const char* s2(av[3]);
     char    c('\0');
     std::string buf("");
-    std::string file("");
+    char file[255];
+    const char *name(0);
     int i = 0;
     int x = 0;
-
-    if (ac != 4 || s1.compare("") == 0 || s2.compare("") == 0)
-        return 0;
-    file += av[1];
-    file += ".replace";
-    std::ifstream ifs(av[1], std::ifstream::in);
-    std::ofstream ofs(file, std::ofstream::out);
+   if (std::strcmp(s1, "") == 0 || std::strcmp(s2, "") == 0)
+      return 0;
+  std::memset(file, 0, std::strlen(file));
+  name = std::strcpy(file, av[1]);
+  name = std::strcat(file, ".replace");
+  std::ifstream ifs(av[1], std::ifstream::in);
+  std::ofstream ofs(name, std::ofstream::out);
   while (ifs.good() && ifs.eof() == 0)
   {
     c = ifs.get();
@@ -24,23 +27,21 @@ int main(int ac, char **av)
   }
   while (i < x - 1)
   {
-     if (buf.at(i) == s1.at(0) || buf.at(i) == s2.at(0))
+     if (buf.at(i) == s1[0] || buf.at(i) == s2[0])
      {
-        if (buf.compare(i, s1.length(), s1) == 0 || buf.compare(i, s2.length(), s2) == 0)
+        if (buf.compare(i, std::strlen(s1), s1) == 0 || buf.compare(i, std::strlen(s2), s2) == 0)
         {
-            if (buf.compare(i, s1.length(), s1) == 0)
-              ofs.write(av[3], s2.length());
-            else
-              ofs.write(av[2], s1.length());
-            if (buf.compare(i, s1.length(), s1) == 0)
+            if (buf.compare(i, std::strlen(s1), s1) == 0)
             {
-              i += s1.length();
-              buf += s2;
+                ofs.write(av[3], std::strlen(s2));
+                i += std::strlen(s1);
+                buf += s2;
             }
             else
             {
-              i += s2.length();
-              buf += s1;
+                ofs.write(av[2], std::strlen(s1));
+                i += std::strlen(s2);
+                buf += s1;
             }
         }
      }
@@ -52,4 +53,5 @@ int main(int ac, char **av)
   }
   ifs.close();
   ofs.close();
+  return 0;
 }

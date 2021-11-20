@@ -1,8 +1,15 @@
 #include "Karen.hpp"
 
-Karen::Karen( void ) : _level{"DEBUG", "INFO", "WARNING", "ERROR"} , _funct{&Karen::info, &Karen::debug, &Karen::warning, &Karen::error}
+Karen::Karen( void )
 {
-
+    _level[0] = "DEBUG";
+    _level[1] = "INFO";
+    _level[2] = "WARNING";
+    _level[3] = "ERROR";
+    _funct[0] = &Karen::debug;
+    _funct[1] = &Karen::info;
+    _funct[2] = &Karen::warning;
+    _funct[3] = &Karen::error;
 }
 
 Karen::~Karen()
@@ -28,4 +35,22 @@ void Karen::warning( void )
 void Karen::error( void )
 {
     std::cout << "This is unacceptable, I want to speak to the manager now." << std::endl;
+}
+
+std::string Karen::getLevel(int i)
+{
+    return this->_level[i];
+}
+
+void Karen::complain( std::string level )
+{
+    for (int i = 0 ; i < 4; i++)
+    {
+        if (level.compare(this->_level[i]) == 0)
+        {
+             void (Karen::*f)() = this->_funct[i];
+             (this->*f)();
+        }
+
+    }
 }

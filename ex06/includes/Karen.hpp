@@ -17,6 +17,7 @@ class Karen
         Karen( void );
         ~Karen();
         void complain( std::string level );
+        std::string getLevel(int i);
 };
 
 #endif

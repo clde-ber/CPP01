@@ -1,13 +1,13 @@
 .SUFFIXES:
 
-NAME	=	Zombie
+NAME	=	Weapon
 LIST	=	main \
 			Weapon \
 			HumanA \
 			HumanB \
 
 HEADER	=	-I includes/
-CFLAGS	=	-Wall -Wextra -Werror -MMD
+CFLAGS	=	-Wall -Wextra -Werror -MMD -std=c++98 -g3 -fsanitize=address
 CC		=	clang++
 
 S_DIR	=	srcs/
