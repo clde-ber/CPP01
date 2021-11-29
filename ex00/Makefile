@@ -7,7 +7,7 @@ LIST	=	main \
 			randomChump \
 
 HEADER	=	-I includes/
-CFLAGS	=	-Wall -Wextra -Werror -MMD -std=c++98 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -MMD -std=c++98
 CC		=	clang++
 
 S_DIR	=	srcs/

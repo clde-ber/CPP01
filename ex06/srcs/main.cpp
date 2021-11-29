@@ -5,11 +5,16 @@ int main( int ac, char **av )
     Karen obj;
     
     if (ac == 1)    
-        return 0;
+    {
+        std::cout << "Did Karen say anything ?" << std::endl;
+        return 1;
+    }
     std::string arg(av[1]);
-    if (ac != 2)
-        return 0;
-    if (ac == 2)
-        obj.complain(arg);
+    if (ac > 2)
+    {
+        std::cout << "Please retry with only one argument" << std::endl;
+        return 1;
+    }
+    obj.complain(arg);
     return 0;
 }
