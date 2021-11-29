@@ -1,57 +1,50 @@
 #include "replace.hpp"
 
-int main(int ac, char **av)
+replace::replace( void ) : _s1(""), _s2(""), _c('\0'), _buf(""), _name("")
 {
-  if (ac != 4)
-        return 0;
-    const char* s1(av[2]);
-    const char* s2(av[3]);
-    char    c('\0');
-    std::string buf("");
-    char file[255];
-    const char *name(0);
-    int i = 0;
-    int x = 0;
-   if (std::strcmp(s1, "") == 0 || std::strcmp(s2, "") == 0)
-      return 0;
-  std::memset(file, 0, std::strlen(file));
-  name = std::strcpy(file, av[1]);
-  name = std::strcat(file, ".replace");
-  std::ifstream ifs(av[1], std::ifstream::in);
-  std::ofstream ofs(name, std::ofstream::out);
-  while (ifs.good() && ifs.eof() == 0)
-  {
-    c = ifs.get();
-    buf += c;
-    x++;
-  }
-  while (i < x - 1)
-  {
-     if (buf.at(i) == s1[0] || buf.at(i) == s2[0])
-     {
-        if (buf.compare(i, std::strlen(s1), s1) == 0 || buf.compare(i, std::strlen(s2), s2) == 0)
+  std::cout << "constructor called" << std::endl;
+}
+
+replace::~replace( void )
+{
+  std::cout << "destructor called" << std::endl;
+}
+
+void replace::writeContentToFile(std::string argZero, std::string argOne, std::string argTwo, std::string outputFile)
+{
+    unsigned long i(0);
+
+    _s1 += argOne;
+    _s2 += argTwo;
+    std::ifstream ifs(argZero.c_str(), std::ifstream::in);
+    std::ofstream ofs(outputFile.c_str(), std::ofstream::out);
+    while (ifs.good() and !ifs.eof())
+    {
+      _c = ifs.get();
+      if (!ifs.eof())
+        _buf += _c;
+    }
+    while (i < _buf.length())
+    {
+        if ((_buf.at(i) == _s1.at(0) or _buf.at(i) == _s2.at(0)) and (!_buf.compare(i, _s1.length(), _s1) or !_buf.compare(i, _s2.length(), _s2)))
         {
-            if (buf.compare(i, std::strlen(s1), s1) == 0)
+            if (!_buf.compare(i, _s1.length(), _s1))
             {
-                ofs.write(av[3], std::strlen(s2));
-                i += std::strlen(s1);
-                buf += s2;
+                ofs.write(_s2.c_str(), _s2.length());
+                i += _s1.length();
             }
             else
             {
-                ofs.write(av[2], std::strlen(s1));
-                i += std::strlen(s2);
-                buf += s1;
+                ofs.write(_s1.c_str(), _s1.length());
+                i += _s2.length();
             }
         }
-     }
-     else
-     {
-        ofs.put(buf.at(i));
-       i++;
-     }
-  }
-  ifs.close();
-  ofs.close();
-  return 0;
+        else
+        {
+            ofs.put(_buf.at(i));
+            i++;
+        }
+    }
+    ifs.close();
+    ofs.close();
 }

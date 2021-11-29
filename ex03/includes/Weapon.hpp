@@ -10,7 +10,7 @@
 class Weapon
 {
     private :
-        std::string _wName;
+        std::string _type;
 
     public :
         Weapon(std::string name);

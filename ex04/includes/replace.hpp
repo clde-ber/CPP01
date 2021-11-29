@@ -4,16 +4,19 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <cstring>
 
-class strings
+class replace
 {
     private:
-        std::string s1;
-        std::string s2;
+        std::string _s1;
+        std::string _s2;
+        char    _c;
+        std::string _buf;
+        std::string _name;
     public:
-        strings( void );
-        ~strings( void );
+        void writeContentToFile(std::string stringZero, std::string argOne, std::string argTwo, std::string outputFile);
+        replace( void );
+        ~replace( void );
 };
 
 #endif
