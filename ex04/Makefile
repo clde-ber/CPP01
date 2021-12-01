@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-NAME	=	Sed
+NAME	=	replace
 LIST	=	main \
 			replace \
 

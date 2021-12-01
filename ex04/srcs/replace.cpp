@@ -17,6 +17,11 @@ void replace::writeContentToFile(std::string argZero, std::string argOne, std::s
     _s1 += argOne;
     _s2 += argTwo;
     std::ifstream ifs(argZero.c_str(), std::ifstream::in);
+    if (!ifs.is_open())
+    {
+        std::cout << "Error : file not found" << std::endl;
+        return;
+    }
     std::ofstream ofs(outputFile.c_str(), std::ofstream::out);
     while (ifs.good() and !ifs.eof())
     {
@@ -26,18 +31,10 @@ void replace::writeContentToFile(std::string argZero, std::string argOne, std::s
     }
     while (i < _buf.length())
     {
-        if ((_buf.at(i) == _s1.at(0) or _buf.at(i) == _s2.at(0)) and (!_buf.compare(i, _s1.length(), _s1) or !_buf.compare(i, _s2.length(), _s2)))
+        if (_buf.at(i) == _s1.at(0) and !_buf.compare(i, _s1.length(), _s1))
         {
-            if (!_buf.compare(i, _s1.length(), _s1))
-            {
-                ofs.write(_s2.c_str(), _s2.length());
-                i += _s1.length();
-            }
-            else
-            {
-                ofs.write(_s1.c_str(), _s1.length());
-                i += _s2.length();
-            }
+            ofs.write(_s2.c_str(), _s2.length());
+            i += _s1.length();
         }
         else
         {

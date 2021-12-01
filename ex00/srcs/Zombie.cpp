@@ -14,7 +14,7 @@ Zombie::Zombie( std::string name ) : _name(name)
 
 Zombie::~Zombie( void )
 {
-    std::cout << "destructor called :" << this->_name << " destroyed" << std::endl;
+    std::cout << "destructor called : " << this->_name << " destroyed" << std::endl;
     return ;
 }
 
